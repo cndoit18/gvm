@@ -2,9 +2,6 @@
 
 . "$GVM_ROOT/scripts/functions"
 
-[[ -d $GVM_ROOT/.git ]] || mv "$GVM_ROOT/git.bak" "$GVM_ROOT/.git" &> /dev/null ||
-	display_fatal "Couldn't find git info"
-
 builtin cd "$GVM_ROOT"
 
 if [[ -n $1 ]]; then
@@ -14,5 +11,3 @@ else
 fi
 
 git pull || display_fatal "Failed to update"
-
-mv ".git" "git.bak" || display_fatal "Couldn't backup git info"
