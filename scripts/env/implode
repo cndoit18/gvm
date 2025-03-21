@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 function gvm_implode() {
-  read -p "Are you sure? [y/N] " -n 1 -r
+  if [ -n "${BASH_VERSION}" ]; then
+    read -p "Are you sure? [y/N] " -n 1 -r
+  elif [ -n "${ZSH_VERSION}" ]; then
+    read -k 1 "REPLY?Are you sure? [y/N] " -r
+  fi
   echo
   if [[ ! $REPLY =~ ^[Yy]$ ]]; then
    display_message "Action cancelled"
