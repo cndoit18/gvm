@@ -39,7 +39,7 @@ To install:
 1.  Install gvm:
 
     ```
-    bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+    bash < <(curl -s -S -L https://raw.githubusercontent.com/cndoit18/gvm/master/binscripts/gvm-installer)
     ```
 
 Or if you are using zsh just change `bash` with `zsh`
