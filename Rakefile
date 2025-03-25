@@ -14,9 +14,10 @@ task :default do
   Dir.mktmpdir('gvm-test') do |tmpdir|
     system(<<-EOSH) || fail
       bash -c '
-        set -e
         #{root_path}/binscripts/gvm-installer #{commit} #{tmpdir}
         source #{tmpdir}/gvm/scripts/gvm
+
+        set -e
         tf --text #{tmpdir}/gvm/tests/*.sh
       '
     EOSH
@@ -30,9 +31,10 @@ task :scenario do
     Dir.mktmpdir('gvm-test') do |tmpdir|
       system(<<-EOSH) || fail
         bash -c '
-          set -e
           #{root_path}/binscripts/gvm-installer #{commit} #{tmpdir}
           source #{tmpdir}/gvm/scripts/gvm
+
+          set -e
           tf --text #{tmpdir}/gvm/tests/scenario/#{name}
         '
       EOSH

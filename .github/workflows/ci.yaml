@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    env:
+      GVM_NO_GIT_BAK: 1
+      GVM_NO_UPDATE_PROFILE: 1
+      SRC_REPO: ${{ github.repositoryUrl }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.17"
+      - name: Before install
+        run: binscripts/gvm-installer ${{ github.sha }} tmp
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - name: Run tests
+        run: |-
+          gem install tf -v '>=0.4.1'
+          rake default scenario
