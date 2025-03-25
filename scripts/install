@@ -74,7 +74,7 @@ update_source() {
 }
 
 copy_source() {
-	git clone -b "$version" "$GO_CACHE_PATH" "$GO_INSTALL_ROOT" >> "$GVM_ROOT/logs/go-$GO_NAME-install.log" 2>&1 ||
+	git -C "$GO_CACHE_PATH" worktree add -f --detach "$GO_INSTALL_ROOT" "$version" >> "$GVM_ROOT/logs/go-$GO_NAME-install.log" 2>&1 ||
 		display_fatal "Couldn't copy source to target folder. Check the logs $GVM_ROOT/logs/go-$GO_NAME-install.log"
 }
 
