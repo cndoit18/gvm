@@ -6,6 +6,7 @@ archive/
 environments/
 tmp/
 *.log
+logs/*
 scripts/gvm
 Gemfile.lock
 .vagrant/
